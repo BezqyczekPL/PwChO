@@ -32,4 +32,51 @@ b) Pobranie najnowszej wersji obrazu ubuntu: **```docker pull ubuntu```**
   Zmiana nazwy obrazu: **```docker tag ubuntu localhost:6677/nowe_ubuntu```**
   
   Wgranie obrazu do utworzonego, prywatnego rejestru: **```docker push localhost:6677/nowe_ubuntu```**.
+  
+## Zadanie 2
+
+Kolejne kroki:
+
+Aby wykonać to zadanie, trzeba uzyskać certyfikat z urzędu certyfikacji (CA).
+Następnie skopiować pliki domain.crt i domain.key do katalogu z certyfikatami (certs).
+
+Następująca komenda montuje katalog w kontenerze za pomocą portu 443 (https)
+  ``docker run -d \
+  --restart=always \
+  --name registry \
+  -v "$(pwd)"/certs:/certs \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  -p 443:443 \
+  registry:2``
+  
+  Od tego momentu można przejść do właściwej części zadania:
+  
+
+1. Należy utworzyć plik z hasłem (podany użytkownik i hasło):
+  ``mkdir auth
+  docker run \
+  --entrypoint htpasswd \
+  httpd:2 -Bbn BezqyczekPL haslo123 > auth/htpasswd``
+  
+2. Uruchomić rejestr z podstawową autoryzacją
+
+  ``docker run -d \
+  -p 6677:6677 \
+  --restart=always \
+  --name registry \
+  -v "$(pwd)"/auth:/auth \
+  -e "REGISTRY_AUTH=htpasswd" \
+  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+  -v "$(pwd)"/certs:/certs \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  registry:2``
+  
+ 3. Zalogować się do rejestru:
+ ```docker login myregistrydomain.com:6677```
+ 
+ 4. Od tego momentu zapewniony jest standardowy mechanizm kontroli dostępu do obrazu.
 
