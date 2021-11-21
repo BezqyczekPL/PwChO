@@ -21,3 +21,8 @@ Sprawdź informacje o obrazie local, a konkretnie te o liczbie warstw. Mój obra
 
 1. Aby zbudować obraz wykorzystując bezpośrednio link do Dockerfile umieszczonego na GitHub należy użyć  polecenia: **docker build adresURLDoRepozytoriumGitHub**.
 2. Aby przenieść stworzony obraz na swoje konto na DockerHub należy użyć poleceń: **docker tag nazwaObrazu:nazwaTagu nazwaRepozytorium:nazwaTagu** i **docker push nazwaRepozytorium:nazwaTagu**.
+
+# Zadania dodatkowe
+
+## Zadanie 1
+a) Uruchomienie registry o nazwie rejestr w wersji domyślnej, działający w tle, na porcie 6677: **``` docker run -d -p 6677:6677 --name rejestr registry```** 
