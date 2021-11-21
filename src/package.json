@@ -1,0 +1,17 @@
+{
+  "name": "Projekt",
+  "version": "1",
+  "description": "",
+  "author": "Dawid Nicpon",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "await": "^0.2.6",
+    "express": "^4.16.1",
+    "node-fetch": "^3.0.0",
+    "open": "^8.4.0"
+  }
+}
