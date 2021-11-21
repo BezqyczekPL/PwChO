@@ -28,6 +28,8 @@ Sprawdź informacje o obrazie local, a konkretnie te o liczbie warstw. Mój obra
 a) Uruchomienie registry o nazwie rejestr w wersji domyślnej, działający w tle, na porcie 6677: **``` docker run -d -p 6677:6677 --name rejestr registry:2```** 
 
 b) Pobranie najnowszej wersji obrazu ubuntu: **```docker pull ubuntu```**
+
   Zmiana nazwy obrazu: **```docker tag ubuntu localhost:6677/nowe_ubuntu```**
+  
   Wgranie obrazu do utworzonego, prywatnego rejestru: **```docker push localhost:6677/nowe_ubuntu```**.
 
